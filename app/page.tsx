@@ -14,7 +14,10 @@ export default function Home() {
     setGameState("desktop");
   };
 
-  const handleSkipUpdate = () => {
+  const handleSkipUpdate = (e: any) => {
+    console.log("e", e);
+
+    alert(`ok got me this time, level: ${level}`);
     if (level < 4) {
       setLevel(level + 1);
     } else {
@@ -28,29 +31,11 @@ export default function Home() {
 
   return (
     <main className="h-screen w-screen bg-[#008080] overflow-hidden">
-      {/* <Alert
-        title="Windows Networking"
-        type="error"
-        dragOptions={{
-          defaultPosition: {
-            x: 130,
-            y: 130,
-          },
-        }}
-        titleBarOptions={<TitleBar.Close key="close" onClick={closeAlert} />}
-        message="The Windows password you typed is incorrect."
-        buttons={[
-          {
-            value: "OK",
-            onClick: closeAlert,
-          },
-        ]}
-      /> */}
       {gameState === "login" && <LoginScreen onLogin={handleLogin} />}
       {gameState === "desktop" && (
         <Desktop>
           <UpdatePopup
-            level={level}
+            // level={level}
             onSkip={handleSkipUpdate}
             onAccept={handleAcceptUpdate}
           />

@@ -1,64 +1,100 @@
-"use client";
+import React from "react";
+import { Modal, TitleBar, Button } from "@react95/core";
+import { Computer, Progman37, ReaderClosed } from "@react95/icons";
 
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+interface Windows95UpgradePromptProps {
+  onSkip: (e: any) => void;
+  onAccept: () => void;
+}
 
-export default function UpdatePopup({
-  level,
+const Windows95UpgradePrompt = ({
   onSkip,
   onAccept,
-}: {
-  level: number;
-  onSkip: () => void;
-  onAccept: () => void;
-}) {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const newX = Math.random() * (window.innerWidth - 300);
-    const newY = Math.random() * (window.innerHeight - 200);
-    setPosition({ x: newX, y: newY });
-  }, []);
-
-  const getSkipButtonStyle = () => {
-    switch (level) {
-      case 1:
-        return "visible";
-      case 2:
-        return "opacity-50 hover:opacity-100";
-      case 3:
-        return "opacity-25 hover:opacity-100";
-      case 4:
-        return "opacity-10 hover:opacity-100";
-      default:
-        return "visible";
-    }
-  };
-
+}: Windows95UpgradePromptProps) => {
   return (
-    <div
-      className="flex flex-1 flex-col w-1/2 justify-center items-center self-center bg-[#c0c0c0] p-4 shadow-md"
-      // style={{ left: position.x, top: position.y, width: "90%", height: "90%" }}
-    >
-      <div className="bg-[#000080] w-full px-2 py-1 text-white">
-        Windows Update
-      </div>
-      <div className="mt-4 text-center">
-        <p className="text-xl font-bold">Update to Windows 11</p>
-        <p className="mt-2">
-          Your system is ready for a free upgrade to Windows 11.
-        </p>
-        <p className="mt-2">Do you want to install now?</p>
-      </div>
-      <div className="mt-4 flex justify-center space-x-4">
-        <Button onClick={onAccept}>Accept Update</Button>
-        <Button
-          onClick={onSkip}
-          className={`${getSkipButtonStyle()} transition-opacity duration-300`}
-        >
-          Skip Update
-        </Button>
-      </div>
+    <div className="flex h-full w-full items-center justify-center bg-[#008080]">
+      <Modal
+        icon={<Computer variant="16x16_4" />}
+        title="Windows Update"
+        className="w-auto max-w-3xl"
+        menu={[]}
+        titleBarOptions={[
+          <TitleBar.Help
+            key="help"
+            onClick={() => {
+              alert("Help!");
+            }}
+          />,
+          <TitleBar.Close key="close" onClick={onAccept} />,
+        ]}
+      >
+        <div className="p-4">
+          <div className="flex flex-col md:flex-row gap-6">
+            {/* Left side - Icon */}
+            <div className="flex justify-center items-start md:items-center">
+              <Progman37 variant="32x32_4" className="h-32 w-32" />
+            </div>
+
+            {/* Right side - Content */}
+            <div className="flex-1">
+              <div className="mb-6">
+                <h2 className="text-xl font-bold mb-2">
+                  Now unlocked: You're eligible for a free upgrade to Windows 11
+                </h2>
+                <p className="mb-4">
+                  Don't worry—you'll be able to use your PC while the download
+                  runs in the background (it's about 4 GB)
+                </p>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 mb-6">
+                <Button onClick={onAccept} className="px-6 py-1">
+                  Get it
+                </Button>
+                <Button className="px-6 py-1">Schedule it</Button>
+              </div>
+
+              {/* System Requirements Notice */}
+              <div className="border border-gray-500 p-3 bg-gray-100 mb-4">
+                <div className="flex items-start gap-2">
+                  <ReaderClosed variant="16x16_4" />
+                  <p className="text-sm">
+                    <strong>Warning:</strong> This may require a new computer.
+                    Windows 11 requires significantly more memory and processing
+                    power than your current system.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom row buttons */}
+          <div className="flex justify-between mt-4 pt-4 border-t border-gray-400">
+            <div className="flex gap-4">
+              <Button className="px-4">Learn more</Button>
+              <Button onClick={onSkip} className="px-4">
+                Keep Windows 95
+              </Button>
+            </div>
+            <div className="flex gap-2">
+              <Button className="px-1">
+                <span role="img" aria-label="Settings">
+                  ⚙️
+                </span>
+              </Button>
+              <Button className="px-1">
+                <span role="img" aria-label="Sound">
+                  🔊
+                </span>
+              </Button>
+              <Button className="px-4">See what's inside</Button>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
-}
+};
+
+export default Windows95UpgradePrompt;
