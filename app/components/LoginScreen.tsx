@@ -30,44 +30,47 @@ export function LoginScreen({ onLogin }: { onLogin: () => void }) {
         ]}
       >
         <div className="mb-4 flex flex-col items-center mr-6 ml-6 justify-between text-xl">
-          <div className="flex flex-row items-center justify-between">
-            <Msrating105 variant="32x32_4" className="mr-6 h-14 w-14" />
+          <div className="flex flex-row items-center justify-between ">
+            {" "}
+            <div className="h-28 w-28 self-start">
+              <Msrating105 variant="32x32_4" className="mt-6 h-16 w-16" />
+            </div>
             <div>
               <div className="mt-4">
                 <span className="m-6 p-6 text-xl">
                   Type a user name and password to log on to Windows
                 </span>
               </div>
-              <div className="flex flex-col">
-                <label
-                  className="mb-1 block text-sm font-bold"
-                  htmlFor="username"
-                >
-                  Username:
+              <div className="flex flex-row gap-4 items-center">
+                <label className="mb-1 block text-md" htmlFor="username">
+                  <u>U</u>sername:
                 </label>
-                <input
-                  type="text"
-                  id="username"
-                  className="w-full rounded border bg-gray-300 px-3 py-2"
-                  value="Administrator"
-                  disabled
-                />
+                <Modal.Content>
+                  <input
+                    type="text"
+                    id="username"
+                    className="ml-auto w-[400px] rounded border bg-gray-300 px-3 py-2"
+                    value="Administrator"
+                    disabled
+                  />
+                </Modal.Content>
               </div>
-              <label
-                className="mb-1 block text-sm font-bold"
-                htmlFor="password"
-              >
-                Password:
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="w-full rounded border bg-gray-300 px-3 py-2"
-                value="********"
-                disabled
-              />
+              <div className="flex flex-row gap-4 items-center">
+                <label className="mb-1 block text-md" htmlFor="password">
+                  <u>P</u>assword:
+                </label>
+                <Modal.Content>
+                  <input
+                    type="password"
+                    id="password"
+                    className="ml-auto w-[400px] rounded border bg-gray-300 px-3 py-2"
+                    value="********"
+                    disabled
+                  />
+                </Modal.Content>
+              </div>
             </div>
-            <div className="flex flex-col gap-3 ml-5">
+            <div className="flex flex-col gap-3 ml-5 h-28 w-28 self-start mt-6">
               <Button
                 // className="w-full bg-[#0000a0] text-white hover:bg-[#000080]"
                 onClick={onLogin}

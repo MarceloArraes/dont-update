@@ -5,11 +5,10 @@ import { LoginScreen } from "./components/LoginScreen";
 import Desktop from "./components/Desktop";
 import UpdatePopup from "./components/UpdatePopup";
 import BlueScreen from "./components/BlueScreen";
-import { Alert, TitleBar } from "@react95/core";
+// import { Alert, TitleBar } from "@react95/core";
 export default function Home() {
   const [gameState, setGameState] = useState("login");
   const [level, setLevel] = useState(1);
-  const [openAlert, setOpenAlert] = useState(false);
 
   const handleLogin = () => {
     setGameState("desktop");
@@ -26,11 +25,9 @@ export default function Home() {
   const handleAcceptUpdate = () => {
     setGameState("bluescreen");
   };
-  const closeAlert = () => setOpenAlert(false);
 
   return (
     <main className="h-screen w-screen bg-[#008080] overflow-hidden">
-      {/* <ThemeProvider> */}
       {/* <Alert
         title="Windows Networking"
         type="error"
@@ -60,7 +57,6 @@ export default function Home() {
         </Desktop>
       )}
       {gameState === "bluescreen" && <BlueScreen />}
-      {/* </ThemeProvider> */}
     </main>
   );
 }
